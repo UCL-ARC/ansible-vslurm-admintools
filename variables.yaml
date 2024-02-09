@@ -1,0 +1,5 @@
+---
+
+add_user:
+  username: slurm-user-01
+  uid: 301
