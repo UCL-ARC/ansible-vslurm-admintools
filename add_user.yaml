@@ -1,23 +1,28 @@
 ---
 - name: Add a user
   hosts: all
+  vars_prompt:
+
+    - name: username
+      prompt: "username:"
+      private: false
+
+    - name: uid
+      prompt: "uid: (int)"
+      private: false
 
   tasks:
-  - name: Get variables
-    ansible.builtin.include_vars:
-      file: variables.yaml
-      name: variables
 
   - name: Create a new user group
     ansible.builtin.group:
-      name: "{{ variables.add_user.username }}"
-      gid: "{{ variables.add_user.uid | int }}"
+      name: "{{ username }}"
+      gid: "{{ uid | int }}"
       state: present 
 
   - name: Create user account
     ansible.builtin.user:
-      name: "{{ variables.add_user.username }}"
-      uid: "{{ variables.add_user.uid | int }}"
-      group: "{{ variables.add_user.username }}"
-      home: "/mnt/nfs/home/{{ variables.add_user.username }}"
+      name: "{{ username }}"
+      uid: "{{ uid | int }}"
+      group: "{{ username }}"
+      home: "/mnt/nfs/home/{{ username }}"
       state: present
