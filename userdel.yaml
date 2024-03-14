@@ -1,0 +1,20 @@
+---
+- name: Remove a user
+  hosts: all
+  vars_prompt:
+
+    - name: username
+      prompt: "username:"
+      private: false
+
+    - name: uid
+      prompt: "uid: (int)"
+      private: false
+
+  tasks:
+
+  - name: Remove user
+    ansible.builtin.user:
+      name: "{{ username }}"
+      uid: "{{ uid | int }}"
+      state: absent
