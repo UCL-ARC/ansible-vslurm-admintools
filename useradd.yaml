@@ -17,7 +17,7 @@
     ansible.builtin.group:
       name: "{{ username }}"
       gid: "{{ uid | int }}"
-      state: present 
+      state: present
 
   - name: Create user account
     ansible.builtin.user:
