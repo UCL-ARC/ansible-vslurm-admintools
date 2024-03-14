@@ -18,3 +18,4 @@
       name: "{{ username }}"
       uid: "{{ uid | int }}"
       state: absent
+      remove: true
